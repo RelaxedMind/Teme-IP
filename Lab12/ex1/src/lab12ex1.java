@@ -1,15 +1,14 @@
-/*Să se creeze o aplicație Java în cadrul căreia există o clasă ce implementează interfața Runnable. Constructorul clasei
-permite definirea unui nume asociat fiecărui obiect instanțiat din clasa respectivă și de asemenea clasa are un atribut
-static ce contorizează numărul de obiecte instanțiate. Metoda run() a clasei va afișa numele obiectului de un număr de
+/*Să se creeze o aplicație Java în cadrul căreia există o clasă ce implementează interfața Runnable. 
+ * Constructorul clasei
+permite definirea unui nume asociat fiecărui obiect instanțiat din clasa respectivă și de asemenea clasa are un 
+atribut
+static ce contorizează numărul de obiecte instanțiate. Metoda run() a clasei va afișa numele obiectului 
+de un număr de
 ori egal cu valoarea contorului și cu o întârziere de 1000msec între afișări.
 Dintr-o clasă separată, creați mai multe fire de execuție cu obiecte diferite din clasa descrisă anterior și analizați
 rezultatele afișate.
 */
 
-class FireEX{
-	
-	
-}
 
 class MyRunnable implements Runnable{
 
@@ -29,10 +28,14 @@ class MyRunnable implements Runnable{
 	
 	@Override
 	public void run() {
-		System.out.println("Numele obiectului este: " + nume_ob);
-		System.out.println("Val contor este: " + nr_ob);
+		
+		
+	
 		try {
-			tred.sleep(1000);
+			for(int i = 0;i<nr_ob;i++)
+			{		System.out.println("Numele obiectului este: " + nume_ob);
+					tred.sleep(1000);
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,7 +50,16 @@ class MyRunnable implements Runnable{
 public class lab12ex1 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		MyRunnable run1 = new MyRunnable("Fir1");
+		MyRunnable run2 = new MyRunnable("Fir2");
+		MyRunnable run3 = new MyRunnable("Fir3");
+		MyRunnable run4 = new MyRunnable("Fir4");
+		MyRunnable run5 = new MyRunnable("Fir5");
+		MyRunnable run6 = new MyRunnable("Fir6");
+		MyRunnable run7 = new MyRunnable("Fir7");
+		MyRunnable run8 = new MyRunnable("Fir8");
+		MyRunnable run9 = new MyRunnable("Fir9");
+		MyRunnable run10 = new MyRunnable("Fir10");
 
 	}
 
