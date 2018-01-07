@@ -19,7 +19,7 @@ câștig, afișati un mesaj corespunzător și timpul necesar câștigării jocu
 */
 
 
-class MyFrame extends JFrame implements Runnable{
+class MyFrame extends JFrame{
 	
 	 ArrayList numbers = new ArrayList();
 	 boolean running = false;
@@ -29,8 +29,9 @@ class MyFrame extends JFrame implements Runnable{
 	 int seconds = 0;
 	 int milliseconds = 0;
 	 Timer timer;
-	 int ordine[] = new int[8];
-	 Thread tred[] = new Thread[9];
+	 int ordine[] = new int[9];
+	// Thread tred[] = new Thread[9];
+	// Thread t = new Thread(this);
 	 boolean In_ordine = true;
 	 int nr_but_apasat;
 	 
@@ -42,15 +43,24 @@ class MyFrame extends JFrame implements Runnable{
 	}
 	
 	 
-	 @Override
-		public void run() {
-
+//	 @Override
+//		public void run() {
+//
+//		 
+//		 ordine[nr_but_apasat-1] =nr_but_apasat;
+//		 
+//
+//			
+//		}
+	 
+	 public void Stocare() {
+		 
 		 
 		 ordine[nr_but_apasat-1] =nr_but_apasat;
 		 
-
-			
-		}
+		 
+		 
+	 }
 
 	 public boolean Verif_ordinea(){
 		 
@@ -147,7 +157,8 @@ class MyFrame extends JFrame implements Runnable{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				timer.stop();
+				
+				
 				
 				
 			}
@@ -170,10 +181,10 @@ class MyFrame extends JFrame implements Runnable{
 //				
 //			}
 //		});
-		for(int i = 0; i<9;i++)
-		{
-			tred[i] = new Thread();
-		}
+//		for(int i = 0; i<9;i++)
+//		{
+//			tred[i] = new Thread();
+//		}
 		
 		  for(int i = 0; i<9;i++)
 		  {
@@ -185,8 +196,8 @@ class MyFrame extends JFrame implements Runnable{
 					public void actionPerformed(ActionEvent e) {
 						timerStart();
 						GetButtonPressed(1);
-					//	tred[0] = new Thread();
-						tred[0].start();
+					//	tred[0].start();
+					//	t.start();
 						  System.out.println("Apelare din buton 1 dupa thread:") ;
 						
 					}
@@ -201,7 +212,8 @@ class MyFrame extends JFrame implements Runnable{
 					public void actionPerformed(ActionEvent e) {
 						GetButtonPressed(2);
 						//tred[1] = new Thread();
-						tred[1].start();
+					//	tred[1].start();
+						Stocare();
 						  System.out.println("Apelare din buton 2 dupa thread:") ;
 					}
 				});
@@ -215,8 +227,10 @@ class MyFrame extends JFrame implements Runnable{
 						  
 						  GetButtonPressed(3);
 					//		tred[2] = new Thread();
-						  tred[2].start();
+					//	  tred[2].start();
+							Stocare();
 						  System.out.println("Apelare din buton 3 dupa thread:") ;
+						  
 					  }
 				  });
 			  }
@@ -230,7 +244,8 @@ class MyFrame extends JFrame implements Runnable{
 						  
 						  GetButtonPressed(4);
 							//tred[3] = new Thread();
-						  tred[3].start();
+						//  tred[3].start();
+							Stocare();
 						  System.out.println("Apelare din buton 4 dupa thread:") ;
 					  }
 				  });
@@ -245,7 +260,8 @@ class MyFrame extends JFrame implements Runnable{
 						  
 						  GetButtonPressed(5);
 						//	tred[4] = new Thread();
-						  tred[4].start();
+						//  tred[4].start();
+							Stocare();
 						  System.out.println("Apelare din buton 5 dupa thread:") ;
 					  }
 				  });
@@ -259,7 +275,8 @@ class MyFrame extends JFrame implements Runnable{
 					  public void actionPerformed(ActionEvent e) {
 						  GetButtonPressed(6);
 						//	tred[5] = new Thread();
-						  tred[5].start();
+						 // tred[5].start();
+							Stocare();
 						  System.out.println("Apelare din buton 6 dupa thread:") ;
 					  }
 				  });
@@ -272,7 +289,8 @@ class MyFrame extends JFrame implements Runnable{
 					  public void actionPerformed(ActionEvent e) {
 						  GetButtonPressed(7);
 						//	tred[6] = new Thread();
-						  tred[6].start();
+						//  tred[6].start();
+							Stocare();
 						  System.out.println("Apelare din buton 7 dupa thread:") ;
 					  }
 				  });
@@ -285,7 +303,8 @@ class MyFrame extends JFrame implements Runnable{
 					  public void actionPerformed(ActionEvent e) {
 						  GetButtonPressed(8);
 						//	tred[7] = new Thread();
-						  tred[7].start();
+						//  tred[7].start();
+							Stocare();
 						  System.out.println("Apelare din buton 8 dupa thread:") ;
 						  
 					  }
@@ -299,7 +318,8 @@ class MyFrame extends JFrame implements Runnable{
 					  public void actionPerformed(ActionEvent e) {
 						  GetButtonPressed(9);  
 							//tred[8] = new Thread();
-						  tred[8].start();
+						 // tred[8].start();
+							Stocare();
 						  System.out.println("Apelare din buton 9 dupa thread:") ;
 						  if(Verif_ordinea() ==true)
 						  {

@@ -22,7 +22,7 @@ class Loto extends Thread{
 	 
 	 
 	 
-	 public static void Verfif_Castig(){
+	 public  static void Verfif_Castig(){
 		 System.out.println("Nr_castig este: " + nr_castig);
 	 }
 	 
@@ -36,9 +36,11 @@ class Loto extends Thread{
 		nr_castig = nr;
 	}
 	
-	public void SetNumar(int extras){
+	public synchronized void SetNumar(int extras){
+				
+				nr_extras = extras;
 		
-		nr_extras = extras;
+		notifyAll();
 		
 	}
 	
