@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.time.*;
 import java.util.TimerTask;
@@ -32,8 +33,10 @@ class MyFrame extends JFrame{
 	 int ordine[] = new int[9];
 	// Thread tred[] = new Thread[9];
 	// Thread t = new Thread(this);
-	 boolean In_ordine = true;
 	 int nr_but_apasat;
+	 int cont=-1;
+	 int[] ordine_corecta={ 1,2,3,4,5,6,7,8,9};
+	
 	 
 	 MyFrame(String text){
 		setTitle(text);
@@ -43,32 +46,23 @@ class MyFrame extends JFrame{
 	}
 	
 	 
-//	 @Override
-//		public void run() {
-//
-//		 
-//		 ordine[nr_but_apasat-1] =nr_but_apasat;
-//		 
-//
-//			
-//		}
 	 
-	 public void Stocare() {
-		 
-		 
-		 ordine[nr_but_apasat-1] =nr_but_apasat;
-		 
-		 
-		 
-	 }
 
+	 
 	 public boolean Verif_ordinea(){
 		 
-		 for(int i =0;i<9;i++)
+		 for(int i =0;i<cont;i++)
 			 if(ordine[i] != i+1)
 				return false;
 		 return true;
 		 
+	 }
+	 
+	
+	 
+	 public void GetEvents(int cont)
+	 {
+		 ordine[cont] = nr_but_apasat;
 	 }
 	 
 	public void GetButtonPressed(int no){
@@ -91,7 +85,8 @@ class MyFrame extends JFrame{
 		  timer.start();
 	
 	}
-	
+	 
+	 
 	private String timeTransfer(){
 
 	     minutes = counter/6000;
@@ -137,6 +132,7 @@ class MyFrame extends JFrame{
 //		  JButton buton8 = new JButton();
 //		  JButton buton9 = new JButton();
 		  JButton start = new JButton("START");
+		  JButton reset = new JButton("RESET");
 		
 		  //start.setPreferredSize(new Dimension (500,500));
 		
@@ -158,8 +154,19 @@ class MyFrame extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
+				timerStart();
 				
 				
+			}
+		});
+		  
+		  reset.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				timer.stop();
+				counter = 0;
+				cont =-1;
 				
 			}
 		});
@@ -171,33 +178,30 @@ class MyFrame extends JFrame{
 			  add(butoane[i]);
 		  }
 		  
-//		  start.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				
-//				timerStart();
-//			
-//				
-//			}
-//		});
-//		for(int i = 0; i<9;i++)
-//		{
-//			tred[i] = new Thread();
-//		}
-		
+
 		  for(int i = 0; i<9;i++)
 		  {
 			  if(butoane[i].getText().equals("1"))
 			  {
+					
 				  butoane[i].addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						timerStart();
+						
+						cont++;
+						
 						GetButtonPressed(1);
-					//	tred[0].start();
-					//	t.start();
+						GetEvents(cont);
+						if (Verif_ordinea() == false){
+							System.out.println("Ordine incorecta! Resetare!");
+							timer.stop();
+							counter = 0;
+							timer.start();
+							cont =-1;
+							
+						}
+					
 						  System.out.println("Apelare din buton 1 dupa thread:") ;
 						
 					}
@@ -206,29 +210,46 @@ class MyFrame extends JFrame{
 			  
 			   if(butoane[i].getText().equals("2"))
 			  {
+					
 				  butoane[i].addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
+						
+						cont++;
 						GetButtonPressed(2);
-						//tred[1] = new Thread();
-					//	tred[1].start();
-						Stocare();
+						GetEvents(cont);
+						if (Verif_ordinea() == false){
+							System.out.println("Ordine incorecta! Resetare!");
+							timer.stop();
+							counter = 0;
+							timer.start();
+							cont =-1;
+							
+						}
+					
 						  System.out.println("Apelare din buton 2 dupa thread:") ;
 					}
 				});
 			  }
 			  if(butoane[i].getText().equals("3"))
 			  {
+			
 				  butoane[i].addActionListener(new ActionListener() {
 					  
 					  @Override
 					  public void actionPerformed(ActionEvent e) {
-						  
+							cont++;
 						  GetButtonPressed(3);
-					//		tred[2] = new Thread();
-					//	  tred[2].start();
-							Stocare();
+						  GetEvents(cont);
+							if (Verif_ordinea() == false){
+								System.out.println("Ordine incorecta! Resetare!");
+								timer.stop();
+								counter = 0;
+								timer.start();
+								cont = -1;
+							}
+				
 						  System.out.println("Apelare din buton 3 dupa thread:") ;
 						  
 					  }
@@ -237,15 +258,23 @@ class MyFrame extends JFrame{
 			
 			  if(butoane[i].getText().equals("4"))
 			  {
+				  
 				  butoane[i].addActionListener(new ActionListener() {
 					  
 					  @Override
 					  public void actionPerformed(ActionEvent e) {
 						  
+						cont++;
 						  GetButtonPressed(4);
-							//tred[3] = new Thread();
-						//  tred[3].start();
-							Stocare();
+						  GetEvents(cont);
+							if (Verif_ordinea() == false){
+								System.out.println("Ordine incorecta! Resetare!");
+								timer.stop();
+								counter = 0;
+								timer.start();
+								cont = -1;
+							}
+							
 						  System.out.println("Apelare din buton 4 dupa thread:") ;
 					  }
 				  });
@@ -253,15 +282,22 @@ class MyFrame extends JFrame{
 			  
 			  if(butoane[i].getText().equals("5"))
 			  {
+					
 				  butoane[i].addActionListener(new ActionListener() {
 					  
 					  @Override
 					  public void actionPerformed(ActionEvent e) {
-						  
+						  cont++;
 						  GetButtonPressed(5);
-						//	tred[4] = new Thread();
-						//  tred[4].start();
-							Stocare();
+						  GetEvents(cont);
+							if (Verif_ordinea() == false){
+								System.out.println("Ordine incorecta! Resetare!");
+								timer.stop();
+								counter = 0;
+								timer.start();
+								cont = -1;
+							}
+							
 						  System.out.println("Apelare din buton 5 dupa thread:") ;
 					  }
 				  });
@@ -269,42 +305,66 @@ class MyFrame extends JFrame{
 			  
 			  if(butoane[i].getText().equals("6"))
 			  {
+				
 				  butoane[i].addActionListener(new ActionListener() {
 					  
 					  @Override
 					  public void actionPerformed(ActionEvent e) {
+						 cont++;
 						  GetButtonPressed(6);
-						//	tred[5] = new Thread();
-						 // tred[5].start();
-							Stocare();
+						  GetEvents(cont);
+							if (Verif_ordinea() == false){
+								System.out.println("Ordine incorecta! Resetare!");
+								timer.stop();
+								counter = 0;
+								timer.start();
+								cont = -1;
+							}
+							
 						  System.out.println("Apelare din buton 6 dupa thread:") ;
 					  }
 				  });
 			  }
 			 if(butoane[i].getText().equals("7"))
 			  {
+				
 				  butoane[i].addActionListener(new ActionListener() {
 					  
 					  @Override
 					  public void actionPerformed(ActionEvent e) {
+						  
+						cont++;
 						  GetButtonPressed(7);
-						//	tred[6] = new Thread();
-						//  tred[6].start();
-							Stocare();
+						  GetEvents(cont);
+							if (Verif_ordinea() == false){
+								System.out.println("Ordine incorecta! Resetare!");
+								timer.stop();
+								counter = 0;
+								timer.start();
+								cont = -1;
+							}
+							
 						  System.out.println("Apelare din buton 7 dupa thread:") ;
 					  }
 				  });
 			  }
 			 if(butoane[i].getText().equals("8"))
 			  {
+				 
 				  butoane[i].addActionListener(new ActionListener() {
 					  
 					  @Override
 					  public void actionPerformed(ActionEvent e) {
+						 cont++;
 						  GetButtonPressed(8);
-						//	tred[7] = new Thread();
-						//  tred[7].start();
-							Stocare();
+						  GetEvents(cont);
+							if (Verif_ordinea() == false){
+								System.out.println("Ordine incorecta! Resetare!");
+								timer.stop();
+								counter = 0;
+								cont = -1;
+								timer.start();
+							}
 						  System.out.println("Apelare din buton 8 dupa thread:") ;
 						  
 					  }
@@ -312,21 +372,40 @@ class MyFrame extends JFrame{
 			  }
 			   if(butoane[i].getText().equals("9"))
 			  {
+				   
 				  butoane[i].addActionListener(new ActionListener() {
 					  
 					  @Override
 					  public void actionPerformed(ActionEvent e) {
+
+						  cont++;
 						  GetButtonPressed(9);  
-							//tred[8] = new Thread();
-						 // tred[8].start();
-							Stocare();
+						  GetEvents(cont);
+							
+					
 						  System.out.println("Apelare din buton 9 dupa thread:") ;
 						  if(Verif_ordinea() ==true)
 						  {
-							  System.out.println("Verif ordinea a fost apelata:") ;
+						 
+							  
+							  System.out.println("Verif ordinea  true a fost apelata:") ;
 							  timer.stop();
+							  
 						  }
-						  
+						  if(Verif_ordinea() ==false)
+						  {
+							  
+								if (Verif_ordinea() == false){
+									System.out.println("Ordine incorecta! Resetare!");
+									timer.stop();
+									counter = 0;
+									cont =-1;
+									timer.start();
+								}	
+							
+							  
+						  }
+					
 					  }
 				  });
 			  }
@@ -344,6 +423,7 @@ class MyFrame extends JFrame{
 //		  add(buton9);
 		  add(timerlabel);
 		  add(start);
+		  add(reset);
 		  
 	}
 
